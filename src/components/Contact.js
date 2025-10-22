@@ -35,7 +35,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8081/consultation/request", formData);
+      await axios.post("https://violent-stacey-solai-aba6a507.koyeb.app/consultation/request", formData);
       alert("Consultation request submitted successfully!");
       setFormData({
         companyName: "",
