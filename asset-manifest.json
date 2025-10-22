@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/naveennekkanti1/Solai.git/static/css/main.6d42ea98.css",
+    "main.js": "/naveennekkanti1/Solai.git/static/js/main.d721eb3f.js",
+    "index.html": "/naveennekkanti1/Solai.git/index.html",
+    "main.6d42ea98.css.map": "/naveennekkanti1/Solai.git/static/css/main.6d42ea98.css.map",
+    "main.d721eb3f.js.map": "/naveennekkanti1/Solai.git/static/js/main.d721eb3f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6d42ea98.css",
+    "static/js/main.d721eb3f.js"
+  ]
+}
