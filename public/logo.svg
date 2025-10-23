@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="300" height="120">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main SOLAI text -->
+  <text x="150" y="75" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="url(#gradient)" text-anchor="middle" letter-spacing="2">SOLAI</text>
+  
+  <!-- Sun icon integrated with 'O' -->
+  <g transform="translate(113, 45)">
+    <!-- Sun rays around the O -->
+    <g stroke="#FCD34D" stroke-width="2.5" stroke-linecap="round" opacity="0.8">
+      <line x1="0" y1="-18" x2="0" y2="-22" />
+      <line x1="13" y1="-13" x2="16" y2="-16" />
+      <line x1="18" y1="0" x2="22" y2="0" />
+      <line x1="13" y1="13" x2="16" y2="16" />
+      <line x1="0" y1="18" x2="0" y2="22" />
+      <line x1="-13" y1="13" x2="-16" y2="16" />
+      <line x1="-18" y1="0" x2="-22" y2="0" />
+      <line x1="-13" y1="-13" x2="-16" y2="-16" />
+    </g>
+    <!-- Small sun center -->
+    <circle cx="0" cy="0" r="6" fill="#FCD34D" opacity="0.5" />
+  </g>
+  
+  <!-- AI circuit dots integrated with 'AI' -->
+  <g opacity="0.6">
+    <circle cx="225" cy="45" r="3" fill="#4F46E5" />
+    <circle cx="235" cy="50" r="2.5" fill="#7C3AED" />
+    <circle cx="245" cy="45" r="3" fill="#4F46E5" />
+    <line x1="225" y1="45" x2="235" y2="50" stroke="#4F46E5" stroke-width="1.5" />
+    <line x1="235" y1="50" x2="245" y2="45" stroke="#7C3AED" stroke-width="1.5" />
+  </g>
+  
+  <!-- Tagline -->
+  <text x="150" y="100" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#6B7280" text-anchor="middle" letter-spacing="3">INTELLIGENT SOLUTIONS</text>
+</svg>
