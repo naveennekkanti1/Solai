@@ -5,6 +5,9 @@ import Hero from "./components/Hero";
 import Contact from "./components/Contact";
 import Services from "./components/Services";
 import NewsletterAdmin from "./components/NewsletterAdmin";
+import About from "./components/About";
+import Portfolio from "./components/Portfolio";
+import UnsubscribeComponent from "./components/UnsubscribeComponent";
 
 function App() {
   return (
@@ -13,9 +16,12 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/newsletter" element={<NewsletterAdmin/>}/>
+          <Route path="/unsubscribe" element={<UnsubscribeComponent/>}/>
         </Routes>
       </div>
     </Router>

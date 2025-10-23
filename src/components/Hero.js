@@ -99,7 +99,9 @@ const Hero = () => {
           transformation that drive innovation and growth.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-6">
-          <button className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition">
+          <button 
+            onClick={() => navigate("/services")}
+            className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition">
             Explore Services
           </button>
           <button
@@ -156,7 +158,7 @@ const Hero = () => {
                 <div className="flex gap-3">
                   <MapPin size={20} className="text-red-600 flex-shrink-0 mt-1" />
                   <span className="text-gray-400 leading-relaxed">
-                    24 th Main Road, HSR Layout, Bengaluru, Karnataka, 560012.
+                    24th Main Road, HSR Layout, Bengaluru, Karnataka, 560012.
                   </span>
                 </div>
                 <div className="flex gap-3">
@@ -200,7 +202,7 @@ const Hero = () => {
           {/* Footer Bottom */}
           <div className="pt-8 border-t border-[#2a3142] text-center">
             <p className="text-gray-400 text-sm">
-              © 2023 SolAi. All rights reserved.
+              © 2025 SolAi. All rights reserved.
             </p>
           </div>
         </div>

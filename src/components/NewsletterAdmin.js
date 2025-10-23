@@ -73,13 +73,14 @@ const NewsletterAdmin = () => {
     }
 
     setSending(true);
-    try {
-      const response = await fetch(`http://localhost:8082/newsletter/send-weekly?content=${encodeURIComponent(newsletter.content)}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+try {
+  const response = await fetch("http://localhost:8082/newsletter/send-weekly", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ content: newsletter.content }) // send content in body
+  });
 
       const data = await response.json();
       
