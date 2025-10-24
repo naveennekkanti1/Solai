@@ -8,6 +8,7 @@ import NewsletterAdmin from "./components/NewsletterAdmin";
 import About from "./components/About";
 import Portfolio from "./components/Portfolio";
 import UnsubscribeComponent from "./components/UnsubscribeComponent";
+import ConsultationMeeting from "./components/ConsultationMeeting";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/newsletter" element={<NewsletterAdmin/>}/>
           <Route path="/unsubscribe" element={<UnsubscribeComponent/>}/>
+          <Route path="/consultationmeeting" element={<ConsultationMeeting />} />
         </Routes>
       </div>
     </Router>
