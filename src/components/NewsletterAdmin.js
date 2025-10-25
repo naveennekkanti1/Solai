@@ -53,7 +53,7 @@ const NewsletterAdmin = () => {
   const fetchSubscribers = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8082/newsletter/subscribers');
+      const response = await fetch('https://violent-stacey-solai-aba6a507.koyeb.app/newsletter/subscribers');
       const data = await response.json();
       if (data.success) {
         setSubscribers(data.subscribers || []);
@@ -74,7 +74,7 @@ const NewsletterAdmin = () => {
 
     setSending(true);
 try {
-  const response = await fetch("http://localhost:8082/newsletter/send-weekly", {
+  const response = await fetch("https://violent-stacey-solai-aba6a507.koyeb.app/newsletter/send-weekly", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
