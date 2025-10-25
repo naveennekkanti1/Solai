@@ -25,7 +25,7 @@ const UnsubscribeComponent = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8082/newsletter/unsubscribe?email=${encodeURIComponent(email)}`,
+        `https://violent-stacey-solai-aba6a507.koyeb.app/newsletter/unsubscribe?email=${encodeURIComponent(email)}`,
         {
           method: 'POST',
           headers: {

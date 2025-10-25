@@ -60,7 +60,7 @@ const Hero = () => {
     setMessage('');
 
     try {
-      const response = await fetch(`http://localhost:8082/newsletter/subscribe?email=${encodeURIComponent(email)}`, {
+      const response = await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/newsletter/subscribe?email=${encodeURIComponent(email)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
