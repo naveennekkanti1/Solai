@@ -1,123 +1,140 @@
-// components/ConsultationDetailModal.jsx
 import React from 'react';
 import { X, Building, User, Mail, Phone, DollarSign, FileText, Calendar } from 'lucide-react';
 
 const ConsultationDetailModal = ({ consultation, onClose }) => {
+  if (!consultation) return null;
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-90vh overflow-y-auto">
-        <div className="sticky top-0 bg-gradient-to-r from-red-500 to-purple-500 text-white p-6 flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Consultation Details</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-600 text-white p-6 flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold">Consultation Details</h2>
+            <p className="text-white/80 text-sm mt-1">View complete information</p>
+          </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white hover:bg-opacity-20 rounded-lg transition"
+            className="p-2 hover:bg-white/20 rounded-xl transition-all duration-200 hover:scale-110"
           >
             <X size={24} />
           </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {/* Company Information */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Building className="text-red-600" size={20} />
-              <h3 className="font-bold text-gray-900">Company Information</h3>
-            </div>
-            <div className="space-y-2">
-              <div>
-                <span className="text-sm font-medium text-gray-600">Company Name:</span>
-                <p className="text-gray-900 font-semibold">{consultation.companyName}</p>
+          <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-5 border border-red-100">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-2 bg-red-500 rounded-lg">
+                <Building className="text-white" size={20} />
               </div>
+              <h3 className="font-bold text-gray-900 text-lg">Company Information</h3>
+            </div>
+            <div>
+              <span className="text-sm font-medium text-gray-500 uppercase tracking-wide">Company Name</span>
+              <p className="text-gray-900 font-semibold text-xl mt-1">{consultation.company_name || 'N/A'}</p>
             </div>
           </div>
 
           {/* Contact Person */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <User className="text-red-600" size={20} />
-              <h3 className="font-bold text-gray-900">Contact Person</h3>
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-2 bg-blue-500 rounded-lg">
+                <User className="text-white" size={20} />
+              </div>
+              <h3 className="font-bold text-gray-900 text-lg">Contact Person</h3>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-4">
               <div>
-                <span className="text-sm font-medium text-gray-600">Name:</span>
-                <p className="text-gray-900 font-semibold">{consultation.contactPersonName}</p>
+                <span className="text-sm font-medium text-gray-500 uppercase tracking-wide">Name</span>
+                <p className="text-gray-900 font-semibold text-lg mt-1">{consultation.contact_name || 'N/A'}</p>
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <Mail className="text-gray-500" size={16} />
-                  <span className="text-sm font-medium text-gray-600">Email:</span>
+              <div className="flex items-start gap-3">
+                <Mail className="text-blue-600 mt-1 flex-shrink-0" size={18} />
+                <div className="flex-1">
+                  <span className="text-sm font-medium text-gray-500 uppercase tracking-wide block">Email</span>
+                  <a href={`mailto:${consultation.contact_email}`} className="text-blue-600 hover:text-blue-700 font-medium break-all">{consultation.contact_email || 'N/A'}</a>
                 </div>
-                <p className="text-gray-900 ml-6">{consultation.contactPersonEmail}</p>
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <Phone className="text-gray-500" size={16} />
-                  <span className="text-sm font-medium text-gray-600">Phone:</span>
+              <div className="flex items-start gap-3">
+                <Phone className="text-blue-600 mt-1 flex-shrink-0" size={18} />
+                <div className="flex-1">
+                  <span className="text-sm font-medium text-gray-500 uppercase tracking-wide block">Phone</span>
+                  <a href={`tel:${consultation.contact_phone}`} className="text-blue-600 hover:text-blue-700 font-medium">{consultation.contact_phone || 'N/A'}</a>
                 </div>
-                <p className="text-gray-900 ml-6">{consultation.contactPersonPhone}</p>
               </div>
             </div>
           </div>
 
           {/* Service & Budget */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100">
               <div className="flex items-center gap-2 mb-3">
-                <FileText className="text-red-600" size={20} />
+                <div className="p-2 bg-purple-500 rounded-lg">
+                  <FileText className="text-white" size={18} />
+                </div>
                 <h3 className="font-bold text-gray-900">Service</h3>
               </div>
-              <p className="text-gray-900">{consultation.serviceInterestedIn}</p>
+              <p className="text-gray-900 font-medium text-lg">{consultation.service || 'N/A'}</p>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-100">
               <div className="flex items-center gap-2 mb-3">
-                <DollarSign className="text-red-600" size={20} />
+                <div className="p-2 bg-green-500 rounded-lg">
+                  <DollarSign className="text-white" size={18} />
+                </div>
                 <h3 className="font-bold text-gray-900">Budget Range</h3>
               </div>
-              <p className="text-gray-900 font-semibold">{consultation.budgetRange}</p>
+              <p className="text-gray-900 font-bold text-xl">{consultation.budget || 'N/A'}</p>
             </div>
           </div>
 
           {/* Project Description */}
-          {consultation.projectDescription && (
-            <div className="bg-gray-50 rounded-lg p-4">
+          {consultation.description && (
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-100">
               <div className="flex items-center gap-2 mb-3">
-                <FileText className="text-red-600" size={20} />
+                <div className="p-2 bg-amber-500 rounded-lg">
+                  <FileText className="text-white" size={18} />
+                </div>
                 <h3 className="font-bold text-gray-900">Project Description</h3>
               </div>
               <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                {consultation.projectDescription}
+                {consultation.description}
               </p>
             </div>
           )}
 
           {/* Timeline */}
           {consultation.timeline && (
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-5 border border-cyan-100">
               <div className="flex items-center gap-2 mb-3">
-                <Calendar className="text-red-600" size={20} />
+                <div className="p-2 bg-cyan-500 rounded-lg">
+                  <Calendar className="text-white" size={18} />
+                </div>
                 <h3 className="font-bold text-gray-900">Timeline</h3>
               </div>
-              <p className="text-gray-900">{consultation.timeline}</p>
+              <p className="text-gray-900 font-medium text-lg">{consultation.timeline}</p>
             </div>
           )}
 
           {/* Status Badge */}
-          <div className="flex items-center justify-center pt-4">
-            <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-              consultation.status === 'received' ? 'bg-blue-100 text-blue-800' :
-              consultation.status === 'reviewing' ? 'bg-yellow-100 text-yellow-800' :
-              'bg-green-100 text-green-800'
+          <div className="flex items-center justify-center pt-2">
+            <div className={`px-6 py-3 rounded-full text-sm font-bold shadow-md ${
+              consultation.status === 'received' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white' :
+              consultation.status === 'reviewing' ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white' :
+              'bg-gradient-to-r from-green-500 to-emerald-600 text-white'
             }`}>
-              Status: {consultation.status.charAt(0).toUpperCase() + consultation.status.slice(1)}
-            </span>
+              Status: {consultation.status ? consultation.status.charAt(0).toUpperCase() + consultation.status.slice(1) : 'Unknown'}
+            </div>
           </div>
         </div>
 
-        <div className="sticky bottom-0 bg-gray-50 p-6 flex justify-end gap-3 border-t">
+        {/* Footer */}
+        <div className="bg-gray-50 p-5 flex justify-end gap-3 border-t">
           <button
             onClick={onClose}
-            className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition"
+            className="px-8 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl font-semibold hover:from-gray-700 hover:to-gray-800 transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Close
           </button>
