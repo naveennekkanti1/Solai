@@ -4,6 +4,11 @@ import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
 import NewsletterAdmin from './NewsletterAdmin';
 import ConsultationsAdmin from './ConsultationsAdmin';
+import FormManager from './FormManager';
+import CreateForm from './CreateForm';
+import EditForm from './EditForm';
+import SubmitResponse from './Submitresponse';
+import FormResponsesViewer from './FormResponsesViewer';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -21,6 +26,11 @@ const AdminDashboard = () => {
         <Route path="/" element={<Navigate to="/admin/newsletter" replace />} />
         <Route path="/newsletter" element={<NewsletterAdmin />} />
         <Route path="/consultations" element={<ConsultationsAdmin />} />
+        <Route path="/forms" element={<FormManager />} />
+        <Route path="/forms/create" element={<CreateForm />} />
+        <Route path="/forms/edit/:id" element={<EditForm />} />
+        <Route path="/forms/:id" element={<SubmitResponse />} />
+        <Route path="/forms/responses/:formId" element={<FormResponsesViewer />} />
       </Routes>
     </div>
   );

@@ -11,6 +11,7 @@ import UnsubscribeComponent from "./components/UnsubscribeComponent";
 import ConsultationMeeting from "./components/ConsultationMeeting";
 import LoginPage from "./components/admin/LoginPage";
 import AdminDashboard from "./components/admin/AdminDashboard";
+import FormPreview from "./components/FormPreview";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -76,6 +77,7 @@ function App() {
               </>
             }
           />
+          <Route path="/form/:formId/preview" element={<FormPreview />} />
           <Route
             path="/contact"
             element={

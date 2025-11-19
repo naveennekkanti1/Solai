@@ -46,6 +46,17 @@ const Navigation = ({ onLogout }) => {
                 <Calendar size={18} className="inline mr-2" />
                 Consultations
               </button>
+              <button
+                onClick={() => navigate('/admin/forms')}
+                className={`px-4 py-2 rounded-lg font-medium transition ${
+                  isActive('/admin/forms')
+                    ? 'bg-red-500 text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <Calendar size={18} className="inline mr-2" />
+                Forms
+              </button>
             </div>
           </div>
           <div className="flex items-center gap-4">

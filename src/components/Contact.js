@@ -15,7 +15,7 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [popup, setPopup] = useState({ message: "", type: "" }); // type: success | error
+  const [popup, setPopup] = useState({ message: "", type: "" });
 
   const services = [
     "Custom Website Development",
@@ -25,12 +25,7 @@ const Contact = () => {
     "Support and Maintenance Projects",
   ];
 
-  const budgetRanges = [
-    "₹1k - ₹10k",
-    "₹11k - ₹100k",
-    "₹1L - ₹5L",
-    "₹5L++",
-  ];
+  const budgetRanges = ["₹1k - ₹10k", "₹11k - ₹100k", "₹1L - ₹5L", "₹5L++"];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,7 +44,7 @@ const Contact = () => {
 
   const showPopup = (message, type) => {
     setPopup({ message, type });
-    setTimeout(() => setPopup({ message: "", type: "" }), 3000); // hide after 3s
+    setTimeout(() => setPopup({ message: "", type: "" }), 3000);
   };
 
   const handleSubmit = async (e) => {
@@ -59,25 +54,29 @@ const Contact = () => {
       return;
     }
 
-    const payload = {
-      company_name: formData.companyName,
-      contact_name: formData.contactPersonName,
-      contact_email: formData.contactPersonEmail,
-      contact_phone: formData.contactPersonPhone,
-      service: formData.serviceInterestedIn || "Not Specified",
-      budget: formData.budgetRange || "Not Specified",
-      description: formData.projectDescription || "",
-    };
+    // Backend expects an ARRAY, not a single object
+    const payload = [
+      {
+        company_name: formData.companyName,
+        contact_name: formData.contactPersonName,
+        contact_email: formData.contactPersonEmail,
+        contact_phone: formData.contactPersonPhone,
+        service: formData.serviceInterestedIn || "Not Specified",
+        budget: formData.budgetRange || "Not Specified",
+        description: formData.projectDescription || "",
+      },
+    ];
 
     try {
       setLoading(true);
       await axios.post(
         "https://violent-stacey-solai-aba6a507.koyeb.app/consultation/request",
-        payload,
+        payload, // <-- ARRAY
         { headers: { "Content-Type": "application/json" } }
       );
       setLoading(false);
       showPopup("Consultation request submitted successfully!", "success");
+
       setFormData({
         companyName: "",
         contactPersonName: "",
@@ -97,7 +96,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      {/* Popup Alert */}
+
       {popup.message && (
         <div
           className={`fixed top-4 right-4 px-6 py-4 rounded shadow-lg text-white z-50 ${
@@ -108,17 +107,15 @@ const Contact = () => {
         </div>
       )}
 
-      {/* Header */}
       <div className="bg-red-600 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold">Request Consultation</h1>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Form Section */}
+
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm p-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-8">
@@ -126,7 +123,7 @@ const Contact = () => {
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Row 1: Company Name and Contact Person Name */}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -138,7 +135,7 @@ const Contact = () => {
                       placeholder="Your Company Name"
                       value={formData.companyName}
                       onChange={handleChange}
-                      className={`w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none ${
+                      className={`w-full border p-3 rounded-md ${
                         errors.companyName ? "border-red-500" : "border-gray-300"
                       }`}
                     />
@@ -157,7 +154,7 @@ const Contact = () => {
                       placeholder="Your Full Name"
                       value={formData.contactPersonName}
                       onChange={handleChange}
-                      className={`w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none ${
+                      className={`w-full border p-3 rounded-md ${
                         errors.contactPersonName ? "border-red-500" : "border-gray-300"
                       }`}
                     />
@@ -167,7 +164,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Row 2: Email and Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -179,7 +175,7 @@ const Contact = () => {
                       placeholder="your@email.com"
                       value={formData.contactPersonEmail}
                       onChange={handleChange}
-                      className={`w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none ${
+                      className={`w-full border p-3 rounded-md ${
                         errors.contactPersonEmail ? "border-red-500" : "border-gray-300"
                       }`}
                     />
@@ -198,7 +194,7 @@ const Contact = () => {
                       placeholder="+91 9876543210"
                       value={formData.contactPersonPhone}
                       onChange={handleChange}
-                      className={`w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none ${
+                      className={`w-full border p-3 rounded-md ${
                         errors.contactPersonPhone ? "border-red-500" : "border-gray-300"
                       }`}
                     />
@@ -208,7 +204,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Row 3: Service and Budget */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -218,7 +213,7 @@ const Contact = () => {
                       name="serviceInterestedIn"
                       value={formData.serviceInterestedIn}
                       onChange={handleChange}
-                      className={`w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none bg-white appearance-none ${
+                      className={`w-full border p-3 rounded-md bg-white ${
                         errors.serviceInterestedIn ? "border-red-500" : "border-gray-300"
                       }`}
                     >
@@ -242,7 +237,7 @@ const Contact = () => {
                       name="budgetRange"
                       value={formData.budgetRange}
                       onChange={handleChange}
-                      className="w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none bg-white appearance-none"
+                      className="w-full border p-3 rounded-md bg-white"
                     >
                       <option value="">Select budget range</option>
                       {budgetRanges.map((budget, index) => (
@@ -254,17 +249,16 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Project Description */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Project Description
                   </label>
                   <textarea
                     name="projectDescription"
-                    placeholder="Describe your project, challenges, and goals..."
+                    placeholder="Describe your project..."
                     value={formData.projectDescription}
                     onChange={handleChange}
-                    className="w-full border p-3 rounded-md focus:ring-2 focus:ring-red-500 outline-none resize-none"
+                    className="w-full border p-3 rounded-md resize-none"
                     rows="6"
                   ></textarea>
                 </div>
@@ -272,7 +266,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full bg-red-600 text-white px-6 py-3 rounded-md font-semibold transition ${
+                  className={`w-full bg-red-600 text-white px-6 py-3 rounded-md font-semibold ${
                     loading ? "opacity-70 cursor-not-allowed" : "hover:bg-red-700"
                   }`}
                 >
@@ -282,12 +276,11 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Information Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-8 sticky top-8">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Contact Information</h3>
               <p className="text-gray-600 text-sm mb-8">
-                We're here to help and answer any question you might have. We look forward to hearing from you.
+                We're here to help and answer any question you might have.
               </p>
 
               <div className="mb-8">
@@ -297,7 +290,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">Email Us</h4>
-                    <a href="mailto:aisolcontact@zohomail.in" className="text-red-600 text-sm hover:underline">
+                    <a
+                      href="mailto:aisolcontact@zohomail.in"
+                      className="text-red-600 text-sm hover:underline"
+                    >
                       aisolcontact@zohomail.in
                     </a>
                     <p className="text-gray-500 text-xs mt-1">Send us an email anytime</p>
@@ -330,8 +326,10 @@ const Contact = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
   );
 };
