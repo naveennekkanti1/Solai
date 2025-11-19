@@ -25,7 +25,7 @@ const EditForm = () => {
   const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8081/v1/forms/${id}`)
+    fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/${id}`)
       .then((res) => res.json())
       .then((data) => {
         const form = data.form || data;
@@ -132,7 +132,7 @@ const EditForm = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:8081/v1/forms/${id}`, {
+      const response = await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

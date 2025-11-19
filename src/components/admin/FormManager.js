@@ -14,7 +14,7 @@ const FormManager = () => {
 
   const fetchForms = async () => {
     try {
-      const res = await fetch("http://localhost:8081/v1/forms/getAll");
+      const res = await fetch("https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/getAll");
       const data = await res.json();
 
       const extractedForms =
@@ -36,7 +36,7 @@ const FormManager = () => {
   const deleteForm = async (id, title) => {
     if (window.confirm(`Are you sure you want to delete "${title}"? This action cannot be undone.`)) {
       try {
-        await fetch(`http://localhost:8081/v1/forms/${id}`, { method: "DELETE" });
+        await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/${id}`, { method: "DELETE" });
         fetchForms();
       } catch (err) {
         console.error("Failed to delete form", err);

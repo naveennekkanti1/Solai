@@ -29,11 +29,11 @@ const FormResponsesViewer = () => {
 
   const fetchFormAndResponses = async () => {
     try {
-      const formRes = await fetch(`http://localhost:8081/v1/forms/${formId}`);
+      const formRes = await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/${formId}`);
       const formData = await formRes.json();
       setFormData(formData);
 
-      const responsesRes = await fetch(`http://localhost:8081/v1/forms/get/${formId}`);
+      const responsesRes = await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/get/${formId}`);
       const responsesData = await responsesRes.json();
       setResponses(Array.isArray(responsesData) ? responsesData : []);
     } catch (err) {

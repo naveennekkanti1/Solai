@@ -25,7 +25,7 @@ const FormPreview = () => {
   const fetchFormData = async () => {
     try {
       console.log("Fetching form with ID:", formId);
-      const res = await axios.get(`http://localhost:8081/v1/forms/${formId}`);
+      const res = await axios.get(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/${formId}`);
       console.log("Form data received:", res.data); // Debug log
       console.log("Fields received:", res.data.fields); // Debug fields specifically
       
@@ -103,7 +103,7 @@ const FormPreview = () => {
     console.log("Submitting payload:", payload); // Debug log
 
     try {
-      const response = await axios.post(`http://localhost:8081/v1/forms/submit`, payload);
+      const response = await axios.post(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/submit`, payload);
       console.log("Submit response:", response.data); // Debug log
       setSubmitted(true);
       setSubmitting(false);

@@ -8,7 +8,7 @@ const DeleteForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:8081/v1/forms/${formId}`, {
+    await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/${formId}`, {
       method: "DELETE",
     });
 

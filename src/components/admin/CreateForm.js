@@ -47,7 +47,7 @@ const CreateForm = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:8081/v1/forms/create", payload);
+      const res = await axios.post("https://violent-stacey-solai-aba6a507.koyeb.app/v1/forms/create", payload);
       alert("Form Created Successfully");
       window.location.href = `/form/${res.data.id}/preview`;
     } catch (err) {
