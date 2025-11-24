@@ -183,16 +183,7 @@ const JobDetails = () => {
               </div>
             )}
 
-            {job.applyClicks !== undefined && (
-              <div className="bg-purple-50 rounded-lg p-4 mb-8">
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-2xl">📊</span>
-                  <p className="text-gray-700 text-lg">
-                    <span className="font-bold text-purple-700">{job.applyClicks}</span> people have applied for this position
-                  </p>
-                </div>
-              </div>
-            )}
+            
 
             {job.jobPostUrl && (
               <div className="flex justify-center">
