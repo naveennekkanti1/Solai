@@ -9,6 +9,7 @@ import CreateForm from './CreateForm';
 import EditForm from './EditForm';
 import SubmitResponse from './Submitresponse';
 import FormResponsesViewer from './FormResponsesViewer';
+import AdminJobPost from './AdminJobPost';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const AdminDashboard = () => {
         <Route path="/forms/edit/:id" element={<EditForm />} />
         <Route path="/forms/:id" element={<SubmitResponse />} />
         <Route path="/forms/responses/:formId" element={<FormResponsesViewer />} />
+        <Route path="/job-post" element={<AdminJobPost />} />
       </Routes>
     </div>
   );

@@ -12,6 +12,8 @@ import ConsultationMeeting from "./components/ConsultationMeeting";
 import LoginPage from "./components/admin/LoginPage";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import FormPreview from "./components/FormPreview";
+import JobList from "./components/JobList";
+import JobDetails from "./components/JobDetails";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -105,6 +107,18 @@ function App() {
               </>
             }
           />
+          <Route path="/jobs" element={
+            <>
+              <Navbar />
+              <JobList />
+            </>
+          } />
+          <Route path="/jobs/:jobId" element={
+            <>
+              <Navbar />
+              <JobDetails />
+            </>
+          } />
 
           {/* Admin Routes - No Navbar */}
           <Route path="/admin/login" element={<LoginPage />} />
