@@ -8,6 +8,7 @@ const JobDetails = () => {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [applying, setApplying] = useState(false);
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -24,6 +25,37 @@ const JobDetails = () => {
 
     fetchJobDetails();
   }, [jobId]);
+
+  const handleApplyClick = async () => {
+    setApplying(true);
+    
+    try {
+      // Increment apply clicks in the backend
+      await fetch(`https://violent-stacey-solai-aba6a507.koyeb.app/jobs/${jobId}/apply`, {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" }
+      });
+      
+      console.log("Click counted successfully");
+      
+      // Open the job posting URL in a new tab
+      if (job.jobPostUrl) {
+        window.open(job.jobPostUrl, '_blank', 'noopener,noreferrer');
+      }
+      
+      // Optionally refresh job data to show updated apply clicks
+      const res = await axios.get(`https://violent-stacey-solai-aba6a507.koyeb.app/jobs/${jobId}`);
+      setJob(res.data);
+    } catch (err) {
+      console.error("Failed to track application click:", err);
+      // Still open the URL even if tracking fails
+      if (job.jobPostUrl) {
+        window.open(job.jobPostUrl, '_blank', 'noopener,noreferrer');
+      }
+    } finally {
+      setApplying(false);
+    }
+  };
 
   const handleBack = () => {
     navigate('/jobs');
@@ -151,19 +183,28 @@ const JobDetails = () => {
               </div>
             )}
 
-            {job.jobPostUrl && (
-  <div className="flex justify-center">
-    <a
-      href={job.jobPostUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-12 py-4 rounded-xl text-lg font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
-    >
-      Apply for this Position →
-    </a>
-  </div>
-)}
+            {job.applyClicks !== undefined && (
+              <div className="bg-purple-50 rounded-lg p-4 mb-8">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-2xl">📊</span>
+                  <p className="text-gray-700 text-lg">
+                    <span className="font-bold text-purple-700">{job.applyClicks}</span> people have applied for this position
+                  </p>
+                </div>
+              </div>
+            )}
 
+            {job.jobPostUrl && (
+              <div className="flex justify-center">
+                <button
+                  onClick={handleApplyClick}
+                  disabled={applying}
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-12 py-4 rounded-xl text-lg font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {applying ? "Processing..." : "Apply for this Position →"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
