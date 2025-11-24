@@ -55,17 +55,16 @@ const Contact = () => {
     }
 
     // Backend expects an ARRAY, not a single object
-    const payload = [
-      {
-        company_name: formData.companyName,
-        contact_name: formData.contactPersonName,
-        contact_email: formData.contactPersonEmail,
-        contact_phone: formData.contactPersonPhone,
-        service: formData.serviceInterestedIn || "Not Specified",
-        budget: formData.budgetRange || "Not Specified",
-        description: formData.projectDescription || "",
-      },
-    ];
+    const payload = {
+  companyName: formData.companyName,
+  contactPersonName: formData.contactPersonName,
+  contactPersonEmail: formData.contactPersonEmail,
+  contactPersonPhone: formData.contactPersonPhone,
+  serviceInterestedIn: formData.serviceInterestedIn || "Not Specified",
+  budgetRange: formData.budgetRange || "Not Specified",
+  projectDescription: formData.projectDescription || "",
+};
+
 
     try {
       setLoading(true);
