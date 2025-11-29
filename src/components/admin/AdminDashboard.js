@@ -10,6 +10,7 @@ import EditForm from './EditForm';
 import SubmitResponse from './Submitresponse';
 import FormResponsesViewer from './FormResponsesViewer';
 import AdminJobPost from './AdminJobPost';
+import WifiCheck from '../admin/WifiCheck';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
