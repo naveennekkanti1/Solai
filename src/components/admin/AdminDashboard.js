@@ -10,19 +10,15 @@ import EditForm from './EditForm';
 import SubmitResponse from './Submitresponse';
 import FormResponsesViewer from './FormResponsesViewer';
 import AdminJobPost from './AdminJobPost';
-import WifiCheck from './WifiCheck'; // adjust path based on folder structure
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('adminAuth');
-    localStorage.removeItem('adminUser');
     navigate('/admin/login');
   };
 
   return (
-    <WifiCheck>
       <div className="min-h-screen bg-gray-50">
         <Navigation onLogout={handleLogout} />
         <Routes>
@@ -37,7 +33,6 @@ const AdminDashboard = () => {
           <Route path="/job-post" element={<AdminJobPost />} />
         </Routes>
       </div>
-    </WifiCheck>
   );
 };
 
