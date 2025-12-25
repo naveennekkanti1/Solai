@@ -1,7 +1,13 @@
-// components/admin/Navigation.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Mail, Calendar, LogOut, User, Briefcase } from 'lucide-react';
+import {
+  Mail,
+  Calendar,
+  LogOut,
+  User,
+  Briefcase,
+  Download
+} from 'lucide-react';
 
 const Navigation = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -21,10 +27,13 @@ const Navigation = ({ onLogout }) => {
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
+
+          {/* LEFT SIDE */}
           <div className="flex items-center gap-8">
             <h1 className="text-xl font-bold text-gray-900">SolAI Admin</h1>
 
             <div className="flex gap-2">
+
               {/* Newsletter */}
               <button
                 onClick={() => navigate('/admin/newsletter')}
@@ -63,6 +72,8 @@ const Navigation = ({ onLogout }) => {
                 <Calendar size={18} className="inline mr-2" />
                 Forms
               </button>
+
+              {/* Job Post */}
               <button
                 onClick={() => navigate('/admin/job-post')}
                 className={`px-4 py-2 rounded-lg font-medium transition ${
@@ -75,10 +86,38 @@ const Navigation = ({ onLogout }) => {
                 Job Post
               </button>
 
+              {/* DOWNLOAD BUTTONS */}
+              <a
+                href="/downloads/Admin.java"
+                download
+                className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition"
+              >
+                <Download size={18} className="inline mr-2" />
+                Admin.java
+              </a>
+
+              <a
+                href="/downloads/Ticket.java"
+                download
+                className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition"
+              >
+                <Download size={18} className="inline mr-2" />
+                Ticket.java
+              </a>
+
+              <a
+                href="/downloads/Main.java"
+                download
+                className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition"
+              >
+                <Download size={18} className="inline mr-2" />
+                Main.java
+              </a>
+
             </div>
           </div>
 
-          {/* User & Logout */}
+          {/* RIGHT SIDE */}
           <div className="flex items-center gap-4">
             {user && (
               <div className="flex items-center gap-2 text-sm text-gray-700">
@@ -97,6 +136,7 @@ const Navigation = ({ onLogout }) => {
               Logout
             </button>
           </div>
+
         </div>
       </div>
     </nav>

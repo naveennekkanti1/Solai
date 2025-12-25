@@ -1,4 +1,3 @@
-// components/admin/AdminDashboard.jsx
 import React from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -10,7 +9,6 @@ import EditForm from './EditForm';
 import SubmitResponse from './Submitresponse';
 import FormResponsesViewer from './FormResponsesViewer';
 import AdminJobPost from './AdminJobPost';
-import WifiCheck from '../admin/WifiCheck';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
