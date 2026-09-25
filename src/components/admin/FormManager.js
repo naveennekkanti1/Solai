@@ -306,7 +306,7 @@ const FormManager = () => {
           <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
 
           <p className="text-gray-600 text-lg">
-            Loading forms..
+            Loading forms...
           </p>
         </div>
       </div>
