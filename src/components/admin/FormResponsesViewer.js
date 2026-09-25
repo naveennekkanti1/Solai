@@ -1,4 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import {
@@ -38,31 +43,46 @@ const FormResponsesViewer = () => {
   const [error, setError] = useState("");
 
   // ============================================================
+  // READ API ERROR
+  // ============================================================
+
+  const readError = useCallback(async (response) => {
+    try {
+      const contentType =
+        response.headers.get("content-type");
+
+      if (
+        contentType?.includes("application/json")
+      ) {
+        const json = await response.json();
+
+        return (
+          json?.message ||
+          json?.error ||
+          JSON.stringify(json)
+        );
+      }
+
+      return await response.text();
+    } catch {
+      return "";
+    }
+  }, []);
+
+  // ============================================================
   // FETCH FORM + RESPONSES
   // ============================================================
 
-  useEffect(() => {
-    if (!formId || formId === "undefined") {
-      setLoading(false);
-
-      alert("Invalid form ID.");
-
-      navigate("/admin/forms");
-
-      return;
-    }
-
-    fetchFormAndResponses();
-  }, [formId]);
-
-  const fetchFormAndResponses = async () => {
+  const fetchFormAndResponses = useCallback(async () => {
     setLoading(true);
     setError("");
 
     try {
       const [formRes, responsesRes] = await Promise.all([
         fetch(
-          `${API_BASE}/v1/forms/${encodeURIComponent(formId)}`
+          `${API_BASE}/v1/forms/${encodeURIComponent(
+            formId
+          )}`
         ),
 
         fetch(
@@ -111,30 +131,29 @@ const FormResponsesViewer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [formId, readError]);
 
-  const readError = async (response) => {
-    try {
-      const contentType =
-        response.headers.get("content-type");
+  // ============================================================
+  // FETCH ON PAGE LOAD
+  // ============================================================
 
-      if (
-        contentType?.includes("application/json")
-      ) {
-        const json = await response.json();
+  useEffect(() => {
+    if (!formId || formId === "undefined") {
+      setLoading(false);
 
-        return (
-          json?.message ||
-          json?.error ||
-          JSON.stringify(json)
-        );
-      }
+      alert("Invalid form ID.");
 
-      return await response.text();
-    } catch {
-      return "";
+      navigate("/admin/forms");
+
+      return;
     }
-  };
+
+    fetchFormAndResponses();
+  }, [
+    formId,
+    navigate,
+    fetchFormAndResponses,
+  ]);
 
   // ============================================================
   // NORMALIZE ANSWERS
@@ -153,15 +172,7 @@ const FormResponsesViewer = () => {
       return answers;
     }
 
-    // Array:
-    //
-    // [
-    //   {
-    //     question: "How was the app?",
-    //     answer: "Good"
-    //   }
-    // ]
-    //
+    // Array
     if (Array.isArray(answers)) {
       const map = {};
 
@@ -329,11 +340,10 @@ const FormResponsesViewer = () => {
       }
     );
 
-    const csv =
-      [
-        headers.map(escapeCSV).join(","),
-        ...rows,
-      ].join("\n");
+    const csv = [
+      headers.map(escapeCSV).join(","),
+      ...rows,
+    ].join("\n");
 
     const blob = new Blob([csv], {
       type: "text/csv;charset=utf-8;",
